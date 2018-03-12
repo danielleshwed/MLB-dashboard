@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Toggle from 'material-ui/Toggle';
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import {
   Table,
@@ -10,12 +11,19 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 
-const styles = {
+const style = {
   container: {
     width: 200,
     overflow: 'hidden',
     margin: '20px auto 0',
-  }
+  },
+  loadingContainer: {
+    position: 'relative',
+  },
+  loading: {
+    display: 'inline-block',
+    position: 'relative',
+  },
 }
 
 class Details extends Component {
@@ -27,10 +35,12 @@ class Details extends Component {
       batterHome: [],
       battersAway: [],
       showAway: true,
-      showHome: true
+      showHome: true,
+      loading: false
     }
     this.getData = this.getData.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
+    this.showLoading= this.showLoading.bind(this);
   }
 
   componentWillMount(){
@@ -39,23 +49,45 @@ class Details extends Component {
     this.getData(date.split("-"), param);
   }
 
+  /**
+  Show home and away batters based on toggle
+  **/
   handleToggle(e, toggled){
     this.setState({
       [e.target.name]: toggled,
     })
   }
 
+  showLoading(){
+    return(
+      <div style={style.loadingContainer}>
+        <RefreshIndicator
+          size={40}
+          left={10}
+          top={0}
+          status="loading"
+          style={style.loading}
+        />
+      </div>
+    )
+  }
+
+  /**
+  Fetch batter stats and line score from api and display stats in table
+  **/
   getData(date, param){
     var url = `http://gd2.mlb.com${param}/boxscore.json`;
     fetch(url)
     .then(data => {
+      this.setState({
+        loading: true
+      })
       return data.json();
     }).then(results => {
         var getScore = results.data.boxscore.linescore;
 
         let gameInfo = getScore.inning_line_score.map((linescore) =>{
           return(
-
                 <TableRow key={linescore.inning}>
                   <TableRowColumn>{linescore.inning}</TableRowColumn>
                   <TableRowColumn>{linescore.home}</TableRowColumn>
@@ -112,7 +144,8 @@ class Details extends Component {
         this.setState({
           gameInfo: gameInfo,
           battersHome: battersHome,
-          battersAway: battersAway
+          battersAway: battersAway,
+          loading: false
         });
     })
 }
@@ -122,7 +155,9 @@ class Details extends Component {
       <div className="App">
         <h1>Details</h1>
 
-          <div style={styles.container}>
+          {this.state.loading ? this.showLoading() : ''}
+
+          <div style={style.container}>
           <h3>Views</h3>
           <Toggle
             name="showHome"

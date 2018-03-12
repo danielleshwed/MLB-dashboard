@@ -9,11 +9,14 @@ import RaisedButton from 'material-ui/RaisedButton';
 class Dashboard extends Component {
   constructor(){
     super();
+
+    //if we have already set a date, get it from local storage
     if(localStorage.getItem("date") !== null){
       this.state = {
         date: localStorage.getItem("date"),
       }
     }
+    //if not, init to empty
     else{
       this.state = {
         date: ''
@@ -27,10 +30,17 @@ class Dashboard extends Component {
     this.scoreboard = null;
   }
 
+  /**
+  Make api call in Scoreboard when "Get Games" is clicked
+  **/
   handleClick(){
     this._scoreboard.getData(this.state.date);
   }
 
+  /**
+  Increment or decrement date when back or next button is clicked then
+  fetch data from api once new date is set
+  **/
   changeDate(e, val){
     var dayMonthYear = this.state.date.split("-");
     var date = new Date(dayMonthYear[0], dayMonthYear[1], dayMonthYear[2]);
@@ -46,6 +56,9 @@ class Dashboard extends Component {
 
   }
 
+  /**
+  Format date to look nicely on the screen
+  **/
   formatDate(date){
     var month = Number(date.getMonth()) + 1;
     var newDate = date.getFullYear() + "-" + ("0" + month).slice(-2) + "-" + ("0" + date.getDate()).slice(-2);
