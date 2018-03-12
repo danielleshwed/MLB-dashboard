@@ -4,7 +4,6 @@ import './App.css';
 import Scoreboard from '../Scoreboard/Scoreboard.js';
 
 import DatePicker from 'material-ui/DatePicker';
-import IconButton from 'material-ui/IconButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
 class Dashboard extends Component {

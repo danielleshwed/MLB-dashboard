@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import { Card, CardTitle } from 'material-ui/Card';
 
 class Scoreboard extends Component {
   constructor(props){

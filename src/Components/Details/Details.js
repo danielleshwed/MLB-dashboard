@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import Scoreboard from '../Scoreboard/Scoreboard.js';
-
-import { Router, Route, Link, IndexRoute, browserHistory } from 'react-router';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import Toggle from 'material-ui/Toggle';
 
 import {
   Table,
   TableBody,
-  TableFooter,
   TableHeader,
   TableHeaderColumn,
   TableRow,
@@ -133,21 +128,21 @@ class Details extends Component {
             name="showHome"
             label="Home Batter Stats"
             onToggle={this.handleToggle}
-            defaultToggled='true'
+            defaultToggled={true}
           />
           <Toggle
             name="showAway"
             label="Away Batter Stats"
             onToggle={this.handleToggle}
-            defaultToggled='true'
+            defaultToggled={true}
           />
       </div>
 
             <Table
               height='300px'
               fixedHeader={true}
-              fixedFooter='false'
-              selectable='false'
+              fixedFooter={false}
+              selectable={false}
               multiSelectable={false}
             >
               <TableHeader
