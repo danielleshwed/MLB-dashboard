@@ -36,7 +36,9 @@ class Details extends Component {
       battersAway: [],
       showAway: true,
       showHome: true,
-      loading: false
+      loading: false,
+      homeName: '',
+      awayName: ''
     }
     this.getData = this.getData.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
@@ -85,7 +87,10 @@ class Details extends Component {
       return data.json();
     }).then(results => {
         var getScore = results.data.boxscore.linescore;
-
+        this.setState({
+          homeName: results.data.boxscore.home_sname,
+          awayName: results.data.boxscore.away_fname
+        })
         let gameInfo = getScore.inning_line_score.map((linescore) =>{
           return(
                 <TableRow key={linescore.inning}>
@@ -154,6 +159,7 @@ class Details extends Component {
     return (
       <div className="App">
         <h1>Details</h1>
+        <h3> {this.state.homeName} (Home) vs. {this.state.awayName} (Away) </h3>
 
           {this.state.loading ? this.showLoading() : ''}
 
@@ -186,15 +192,15 @@ class Details extends Component {
                 enableSelectAll={false}
               >
             <TableRow>
-              <TableHeaderColumn colSpan="3" tooltip="Super Header" style={{textAlign: 'center'}}>
+              <TableHeaderColumn colSpan="3" tooltip="Linescores" style={{textAlign: 'center'}}>
                 Game Details
               </TableHeaderColumn>
             </TableRow>
 
             <TableRow>
-              <TableHeaderColumn tooltip="The ID">Inning Number</TableHeaderColumn>
-              <TableHeaderColumn tooltip="The Name">Home</TableHeaderColumn>
-              <TableHeaderColumn tooltip="The Status">Away</TableHeaderColumn>
+              <TableHeaderColumn tooltip="Inning">Inning Number</TableHeaderColumn>
+              <TableHeaderColumn tooltip={this.state.homeName}>Home</TableHeaderColumn>
+              <TableHeaderColumn tooltip={this.state.awayName}>Away</TableHeaderColumn>
             </TableRow>
             </TableHeader>
             <TableBody
@@ -217,7 +223,7 @@ class Details extends Component {
               enableSelectAll={false}
             >
           <TableRow>
-            <TableHeaderColumn colSpan="15" tooltip="Super Header" style={{textAlign: 'center'}}>
+            <TableHeaderColumn colSpan="15" tooltip="Batter Stats" style={{textAlign: 'center'}}>
               Batter Stats
             </TableHeaderColumn>
           </TableRow>
