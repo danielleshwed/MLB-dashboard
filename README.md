@@ -2,7 +2,7 @@ Take home interview test for Konrad Group
 
 ## How to Run
 `npm install`
-`npm build`
+`npm run build`
 `npm start`
 
 ## What Could have been Improved?

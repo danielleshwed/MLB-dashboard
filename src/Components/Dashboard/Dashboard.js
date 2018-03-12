@@ -9,7 +9,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 class Dashboard extends Component {
   constructor(){
     super();
-    if(localStorage.getItem("date") !== 'undefined'){
+    if(localStorage.getItem("date") !== null){
       this.state = {
         date: localStorage.getItem("date"),
       }

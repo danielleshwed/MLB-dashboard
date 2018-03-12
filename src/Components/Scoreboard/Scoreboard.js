@@ -6,23 +6,24 @@ import { Card, CardTitle } from 'material-ui/Card';
 class Scoreboard extends Component {
   constructor(props){
     super(props);
-
-    if(localStorage.getItem("date") !== 'undefined'){
-      this.state = {
-        date: localStorage.getItem("date"),
-      }
-      this.getData(this.state.date);
-
-    }
-    else{
+    console.log(this.props.date)
+    if(localStorage.getItem("date") == null){
       this.state = {
         games: [],
         date: this.props.date.split("-")
       }
     }
+    else{
+      this.state = {
+        date: localStorage.getItem("date"),
+        flag: true
+      }
+      this.getData(this.state.date);
+    }
 
     this.getDetails = this.getDetails.bind(this);
   }
+
 
   getDetails(e, gameData){
     localStorage.setItem("date", this.state.date);

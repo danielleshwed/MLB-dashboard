@@ -162,7 +162,9 @@ class Details extends Component {
               <TableHeaderColumn tooltip="The Status">Away</TableHeaderColumn>
             </TableRow>
             </TableHeader>
-            <TableBody>
+            <TableBody
+              displayRowCheckbox={false}
+            >
               {this.state.gameInfo}
             </TableBody>
           </Table>
