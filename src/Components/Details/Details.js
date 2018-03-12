@@ -105,20 +105,15 @@ class Details extends Component {
           return(
                 <TableRow key={batter.name_display_first_last}>
                   <TableRowColumn>{batter.name_display_first_last}</TableRowColumn>
+                  <TableRowColumn>Home</TableRowColumn>
                   <TableRowColumn>{batter.ab}</TableRowColumn>
                   <TableRowColumn>{batter.r}</TableRowColumn>
                   <TableRowColumn>{batter.h}</TableRowColumn>
                   <TableRowColumn>{batter.bb}</TableRowColumn>
-                  <TableRowColumn>{batter.s_bb}</TableRowColumn>
                   <TableRowColumn>{batter.rbi}</TableRowColumn>
                   <TableRowColumn>{batter.bo}</TableRowColumn>
                   <TableRowColumn>{batter.cs}</TableRowColumn>
-                  <TableRowColumn>{batter.lob}</TableRowColumn>
-                  <TableRowColumn>{batter.so}</TableRowColumn>
                   <TableRowColumn>{batter.avg}</TableRowColumn>
-                  <TableRowColumn>{batter.obp}</TableRowColumn>
-                  <TableRowColumn>{batter.slg}</TableRowColumn>
-                  <TableRowColumn>{batter.ops}</TableRowColumn>
                 </TableRow>
 
             )
@@ -128,20 +123,17 @@ class Details extends Component {
           return(
             <TableRow key={batter.name_display_first_last}>
               <TableRowColumn>{batter.name_display_first_last}</TableRowColumn>
+              <TableRowColumn>Away</TableRowColumn>
               <TableRowColumn>{batter.ab}</TableRowColumn>
               <TableRowColumn>{batter.r}</TableRowColumn>
               <TableRowColumn>{batter.h}</TableRowColumn>
               <TableRowColumn>{batter.bb}</TableRowColumn>
-              <TableRowColumn>{batter.s_bb}</TableRowColumn>
               <TableRowColumn>{batter.rbi}</TableRowColumn>
               <TableRowColumn>{batter.bo}</TableRowColumn>
               <TableRowColumn>{batter.cs}</TableRowColumn>
-              <TableRowColumn>{batter.lob}</TableRowColumn>
-              <TableRowColumn>{batter.so}</TableRowColumn>
+
               <TableRowColumn>{batter.avg}</TableRowColumn>
-              <TableRowColumn>{batter.obp}</TableRowColumn>
-              <TableRowColumn>{batter.slg}</TableRowColumn>
-              <TableRowColumn>{batter.ops}</TableRowColumn>
+
             </TableRow>
 
             )
@@ -223,27 +215,24 @@ class Details extends Component {
               enableSelectAll={false}
             >
           <TableRow>
-            <TableHeaderColumn colSpan="15" tooltip="Batter Stats" style={{textAlign: 'center'}}>
+            <TableHeaderColumn colSpan="10" tooltip="Batter Stats" style={{textAlign: 'center'}}>
               Batter Stats
             </TableHeaderColumn>
           </TableRow>
 
-          <TableRow>
+          <TableRow
+            hoverable={true}
+          >
             <TableHeaderColumn tooltip="Player">Player</TableHeaderColumn>
+            <TableHeaderColumn tooltip="Team">Team</TableHeaderColumn>
             <TableHeaderColumn tooltip="AB">AB</TableHeaderColumn>
             <TableHeaderColumn tooltip="R">R</TableHeaderColumn>
             <TableHeaderColumn tooltip="H">H</TableHeaderColumn>
             <TableHeaderColumn tooltip="2B">2B</TableHeaderColumn>
-            <TableHeaderColumn tooltip="3B">3B</TableHeaderColumn>
             <TableHeaderColumn tooltip="RBI">RBI</TableHeaderColumn>
             <TableHeaderColumn tooltip="RBI">BO</TableHeaderColumn>
             <TableHeaderColumn tooltip="CS">CS</TableHeaderColumn>
-            <TableHeaderColumn tooltip="LOB">LOB</TableHeaderColumn>
-            <TableHeaderColumn tooltip="SO">SO</TableHeaderColumn>
             <TableHeaderColumn tooltip="AVG">AVG</TableHeaderColumn>
-            <TableHeaderColumn tooltip="OBP">OBP</TableHeaderColumn>
-            <TableHeaderColumn tooltip="SLG">SLG</TableHeaderColumn>
-            <TableHeaderColumn tooltip="OPS">OPS</TableHeaderColumn>
           </TableRow>
           </TableHeader>
           <TableBody
