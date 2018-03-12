@@ -238,8 +238,8 @@ class Details extends Component {
           <TableBody
             displayRowCheckbox={false}
           >
-            {this.state.showAway ? this.state.battersHome : ''}
-            {this.state.showHome? this.state.battersAway: ''}
+            {this.state.showAway ? this.state.battersAway : ''}
+            {this.state.showHome? this.state.battersHome: ''}
           </TableBody>
         </Table>
       </div>
