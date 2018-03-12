@@ -13,21 +13,21 @@ class Scoreboard extends Component {
         date: localStorage.getItem("date"),
       }
       this.getData(this.state.date);
+
     }
     else{
       this.state = {
         games: [],
-        date: this.props.date.split("-"),
-        loading: false
+        date: this.props.date.split("-")
       }
     }
 
     this.getDetails = this.getDetails.bind(this);
   }
 
-  getDetails(e){
+  getDetails(e, gameData){
     localStorage.setItem("date", this.state.date);
-    localStorage.setItem("url", e.target.value);
+    localStorage.setItem("url", e);
     browserHistory.push("/details");
   }
 
@@ -50,12 +50,32 @@ class Scoreboard extends Component {
 
       let games = sortedGames.map((game) =>{
         var gameData = game.game_data_directory;
+
+        if(game.linescore.r.home > game.linescore.r.away){
+          var winnerName = game.home_team_name;
+          var winnerScore = game.linescore.r.home;
+          var loserName = game.away_team_name;
+          var loserScore = game.linescore.r.away;
+        } else {
+          loserName = game.home_team_name;
+          loserScore = game.linescore.r.home;
+          winnerName = game.away_team_name;
+          winnerScore = game.linescore.r.away;
+        }
         return(
-          <Card key={game.id}>
-            <CardTitle title={game.home_team_name} subtitle= {game.linescore.r.home}/>
-            <CardTitle title={game.away_team_name} subtitle= {game.linescore.r.away}/>
+          <Card key={game.id}
+            style={{
+              width: '50%',
+              margin: '0 auto',
+              paddingBottom: '50px',
+              paddingTop: '30px',
+              marginTop: '10px',
+              backgroundColor: '#6C7A89',
+            }}>
+            <b><CardTitle title={winnerName} subtitle= {winnerScore}/></b>
+            <CardTitle title={loserName} subtitle= {loserScore}/>
             <CardTitle title={game.status.status} />
-            <RaisedButton value = {gameData} onClick={(e) => this.getDetails(e)} label="Details" />
+            <RaisedButton value = {gameData} onClick={this.getDetails.bind(this, gameData)} label="Details" />
           </Card>
         )
       })
